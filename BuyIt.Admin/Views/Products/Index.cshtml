@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Buyit.BOL.DTO.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p class="float-right">
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-brd">
+    <thead>
+        <tr>
+            <th class="small-th">
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th class="small-th">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th class="big-th">
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th class="small-th">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th class="small-th">
+                @Html.DisplayNameFor(model => model.IsPrefferedDrink)
+            </th>
+            <th class="small-th">
+                @Html.DisplayNameFor(model => model.InStock)
+            </th>
+            <th class="small-th">
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var path = "/images/" + item.ImageUrl;
+            <tr>
+                <td class="table-image">
+                    <img src="@path" alt="nn" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LongDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPrefferedDrink)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+
+            </tr>
+            <tr class="crud-container">
+                <td>    </td>
+                <td>    </td>
+                <td>    </td>
+                <td>    </td>
+                <td>    </td>
+                <td>    </td>
+
+                <td class="crud">
+                    <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                </td>
+            </tr>
+
+
+        }
+    </tbody>
+</table>

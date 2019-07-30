@@ -1,0 +1,39 @@
+﻿
+@model HomeVM
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="slider-container">
+    @await Html.PartialAsync("Corousel")
+
+</div>
+<div class="home-week-container">
+    <h1>Products Just For You</h1>
+    <hr />
+    <div class="product-container">
+        @foreach (var item in Model.PreferedProducts)
+        {
+            var path = "http://localhost:64237/images/" + item.ImageUrl;
+            <div class="product-summary">
+                <a asp-action="Details" asp-route-id="@item.ProductId">
+                    <img src="@path" alt="Alternate Text" />
+                </a>
+                <div class="product-container-details">
+
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                    <div class="price">
+                        Ksh @Html.DisplayFor(modelItem => item.Price)
+                    </div>
+
+                </div>
+                <a class="btn-success" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.ProductId">Add To Cart</a>
+
+            </div>
+        }
+    </div>
+</div>

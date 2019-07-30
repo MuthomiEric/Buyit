@@ -1,0 +1,29 @@
+﻿@model Product
+
+@{
+    var path = "http://localhost:64237/images/";
+}
+
+
+
+<div class="product-container">
+    <a asp-action="Details" asp-route-id="@Model.ProductId">
+        <img src="@path+ @Model.ImageUrl" alt="Alternate Text" />
+    </a>
+
+
+    <div class="product-container-details">
+
+        <div>
+            @Html.DisplayFor(modelItem => Model.Name)
+        </div>
+        <div class="price">
+            <strong>Ksh @Html.DisplayFor(modelItem => Model.Price)</strong>
+        </div>
+
+    </div>
+    <a class="btn-success" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.ProductId">Add To Cart</a>
+
+</div>
+
+

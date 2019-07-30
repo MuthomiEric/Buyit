@@ -1,0 +1,31 @@
+﻿@model IList<Buyit.BOL.DTO.Order.OrderInfo>
+
+@{
+    ViewData["Title"] = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+
+                </td>
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>

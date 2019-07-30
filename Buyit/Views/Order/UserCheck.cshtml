@@ -1,0 +1,19 @@
+﻿@model User
+@inject SignInManager<User> signInManager
+@{
+    ViewData["Title"] = "UserCheck";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UserCheck</h2>
+
+<div>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <p>@Model.Email</p>
+        <p>@Model.LastName</p>
+        <p>@Model.FirstName</p>
+    }
+
+
+</div>

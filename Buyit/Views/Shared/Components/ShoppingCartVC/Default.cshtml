@@ -1,0 +1,20 @@
+﻿@model ShoppingCartVM
+<!-- Cart -->
+
+
+<li class="header-cart dropdown default-dropdown">
+    <a asp-controller="ShoppingCart" aria-expanded="true">
+        <div class="header-btns-icon">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="qty">
+                @Model.shoppingCart.ShoppingCartItems.Count
+            </span>
+        </div>
+        <strong class="text-uppercase">My Cart:</strong>
+        <br>
+        <span>@Model.shoppingCart.GetShoppingCartTotal()</span>
+    </a>
+
+</li>
+
+<!-- /Cart -->

@@ -1,0 +1,46 @@
+﻿
+@inject SignInManager<User> signInManager
+
+
+
+<li class="header-account dropdown default-dropdown">
+    <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+        <div class="header-btns-icon">
+            <i class="fa fa-user-o"></i>
+        </div>
+        <strong class="text-uppercase">My Account </strong>
+    </div>
+    @if (!signInManager.IsSignedIn(User))
+    {
+        <a asp-action="Login" asp-controller="Account" class="text-uppercase">Login |</a> <a asp-action="Register" asp-controller="Account" class="text-uppercase">Join</a>
+
+    }
+    <ul class="custom-menu">
+
+        @if (signInManager.IsSignedIn(User))
+        {
+            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+            <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+            <li><a asp-action="MyOrders" asp-controller="Account"><i class="fa fa-check"></i> Orders</a></li>
+        }
+
+
+
+        @if (!signInManager.IsSignedIn(User))
+        {
+            <li><a asp-action="Login" asp-controller="Account"><i class="fa fa-unlock-alt"></i> Login</a></li>
+        }
+
+        @if (signInManager.IsSignedIn(User))
+        {
+            <li><a asp-action="SignOut" asp-controller="Account"><i class="fa fa-unlock-alt"></i> Logout</a></li>
+        }
+
+        @if (!signInManager.IsSignedIn(User))
+        {
+            <li><a asp-action="Register" asp-controller="Account"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+        }
+
+    </ul>
+</li>
