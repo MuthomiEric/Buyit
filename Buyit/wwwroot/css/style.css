@@ -72,6 +72,31 @@ body {
 My style
 ===========================================================*/
 
+.centerform {
+    width: 50%;
+    min-width: 400px;
+    margin: 20px auto;
+}
+/*LOGIN*/
+.login-reg {
+    background-color: #fff;
+    width: 100px;
+    padding: 20px;
+}
+
+    .login-reg p {
+        font-size: 20px;
+    }
+
+.input-fill {
+    width: 100%;
+    background-color: #1f1f1f;
+    color: #fff;
+    font-size: 20px;
+}
+
+/*LOGIN*/
+
 
 /*Logo*/
 .logo {
@@ -109,13 +134,14 @@ My style
 
 .product-container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .product-summary {
     width: 200px;
     height: 300px;
     padding: 10px;
-    margin-right: 10px;
+    margin: 10px 10px 10px 0;
     border-radius: 5px;
     background-color: #fff;
     box-sizing: border-box;

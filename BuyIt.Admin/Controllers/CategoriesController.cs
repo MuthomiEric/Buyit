@@ -72,14 +72,14 @@ namespace BuyIt.Admin.Controllers
         }
 
         // GET: Categories/Edit/5
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = _context.GetByIdAsync(id);
+            var category = await _context.GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();

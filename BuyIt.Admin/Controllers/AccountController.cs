@@ -37,28 +37,40 @@ namespace BuyIt.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(loginVm.Username);
-
-                if (await _userManager.IsInRoleAsync(user, "Admin"))
+                if (user != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, loginVm.Rememberme, false);
-                    if (result.Succeeded)
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
                     {
-                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        var result = await _signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, loginVm.Rememberme, false);
+                        if (result.Succeeded)
                         {
-                            Redirect(returnUrl);
+                            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                            {
+                                Redirect(returnUrl);
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Products");
+                            }
                         }
-                        else
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
+
+                        ModelState.AddModelError("", "Invalid Login Attempt!!!");
+                        return View(loginVm);
                     }
 
-                    ModelState.AddModelError("", "Invalid Login Attempt!!!");
+                    ModelState.AddModelError("", $"The User {user.Email} Does Not Exist!!!");
                     return View(loginVm);
                 }
 
-                ModelState.AddModelError("", $"The User {user.Email} Does Not Exist!!!");
-                return View(loginVm);
+                else
+                {
+                    ModelState.AddModelError("", $"The User {loginVm.Username} Does Not Exist!!!");
+                    return View(loginVm);
+                }
+
+
+                //ModelState.AddModelError("", $"The User {user.Email} Does Not Exist!!!");
+                //return View(loginVm);
             }
 
             return View(loginVm);

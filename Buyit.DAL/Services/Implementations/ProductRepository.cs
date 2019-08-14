@@ -39,7 +39,10 @@ namespace Buyit.DAL.Services.Implementations
 
         public void Delete(Guid Id)
         {
-            throw new NotImplementedException();
+            var prod = GetById(Id);
+
+            _dbContext.Products.Remove(prod);
+            _dbContext.SaveChanges();
         }
 
         public Product GetById(Guid Id)
@@ -63,7 +66,7 @@ namespace Buyit.DAL.Services.Implementations
 
         public IEnumerable<Product> PreferedProduct()
         {
-            return _dbContext.Products.Where(p => p.IsPrefferedDrink);
+            return _dbContext.Products.Where(p => p.IsPreffered);
         }
 
         public bool ProductExists(Guid id)
@@ -73,10 +76,10 @@ namespace Buyit.DAL.Services.Implementations
 
         }
 
-        public async void UpDate(Product Entity)
+        public void UpDate(Product Entity)
         {
-            _dbContext.Update(Entity);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.Products.Update(Entity);
+            _dbContext.SaveChanges();
 
         }
 

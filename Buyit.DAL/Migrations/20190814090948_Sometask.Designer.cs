@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Buyit.DAL.Migrations
 {
     [DbContext(typeof(BuyitDbContext))]
-    [Migration("20190727104210_Much1")]
-    partial class Much1
+    [Migration("20190814090948_Sometask")]
+    partial class Sometask
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,14 +59,16 @@ namespace Buyit.DAL.Migrations
 
                     b.Property<DateTime>("PlacedAt");
 
-                    b.Property<string>("UserId");
+                    b.Property<Guid>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.Property<string>("ZipCode")
                         .IsRequired();
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Orders");
                 });
@@ -106,7 +108,7 @@ namespace Buyit.DAL.Migrations
 
                     b.Property<int>("InStock");
 
-                    b.Property<bool>("IsPrefferedDrink");
+                    b.Property<bool>("IsPreffered");
 
                     b.Property<string>("LongDescription")
                         .IsRequired();
@@ -313,7 +315,7 @@ namespace Buyit.DAL.Migrations
                 {
                     b.HasOne("Buyit.BOL.DTO.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Buyit.BOL.DTO.Order.OrderInfo", b =>

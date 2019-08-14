@@ -22,7 +22,7 @@ namespace Buyit.BOL.DTO
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
         [Display(Name = "Is Preferend")]
-        public bool IsPrefferedDrink { get; set; }
+        public bool IsPreffered { get; set; }
         [Required]
         [Display(Name = "Items In Stock")]
         public int InStock { get; set; }

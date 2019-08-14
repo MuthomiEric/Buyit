@@ -48,7 +48,9 @@ namespace Buyit.DAL.Services.Implementations
 
         public async Task<Category> GetByIdAsync(Guid Id)
         {
-            return await _dbContext.Categories.FirstOrDefaultAsync(p => p.CategoryId == Id);
+
+            var category = await _dbContext.Categories.FirstOrDefaultAsync(p => p.CategoryId == Id);
+            return category;
         }
 
         public void UpDate(Category Entity)

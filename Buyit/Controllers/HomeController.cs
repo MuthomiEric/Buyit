@@ -8,6 +8,7 @@ using Buyit.Models;
 using Buyit.DAL.Services.Interfaces;
 using Buyit.Models.ViewModels.Home;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Buyit.Controllers
 {

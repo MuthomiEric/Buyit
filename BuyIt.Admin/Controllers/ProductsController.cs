@@ -80,7 +80,7 @@ namespace BuyIt.Admin.Controllers
                     ImageUrl = uniqueFileName,
 
                     CategoryId = prod.CategoryId,
-                    IsPrefferedDrink = true,
+                    IsPreffered = true,
                     LongDescription = prod.Description,
                     Name = prod.ProductName,
                     Price = prod.Price,
@@ -99,110 +99,112 @@ namespace BuyIt.Admin.Controllers
             return View(prod);
         }
         // GET: Products/Edit/5
-        //public IActionResult Edit(Guid id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var product = _product.GetById(id);
+        public IActionResult Edit(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var product = _product.GetById(id);
 
-        //    EditProductVM edit = new EditProductVM
-        //    {
-        //        Id = product.ProductId,
-        //        ProductName = product.Name,
-        //        Description = product.LongDescription,
-        //        Price = product.Price,
-        //        ExistingImage = product.ImageUrl,
-        //        CategoryId = product.CategoryId,
-        //        Category = product.Category,
-        //        InStock = product.InStock,
-
-
-        //    };
-
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["CategoryId"] = new SelectList(_category.AllCategories(), "CategoryId", "CategoryName", product.Category);
-        //    return View(edit);
-        //}
-
-        //// POST: Products/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(Guid id, EditProductVM product)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        Product prod = new Product
-        //        {
-        //            Name = product.ProductName,
-        //            InStock = product.InStock,
-        //            LongDescription = product.Description,
-        //            Price = product.Price,
-
-        //        };
+            EditProductVM edit = new EditProductVM
+            {
+                Id = product.ProductId,
+                ProductName = product.Name,
+                Description = product.LongDescription,
+                Price = product.Price,
+                ExistingImage = product.ImageUrl,
+                CategoryId = product.CategoryId,
+                Category = product.Category,
+                InStock = product.InStock,
 
 
-        //        if (product.Photo != null)
-        //        {
-        //            if (product.ExistingImage != null)
-        //            {
-        //                string filep = Path.Combine(_environment.WebRootPath, "images/", product.ExistingImage);
-        //                System.IO.File.Delete(filep);
-        //            }
-        //            prod.ImageUrl = FileCheck(product);
-        //        }
-        //        else
-        //        {
-        //            prod.ImageUrl = product.ExistingImage;
-        //        }
 
-        //        prod.CategoryId = product.CategoryId;
-        //        prod.Category = product.Category;
+            };
 
-        //        _product.UpDate(prod);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            ViewData["CategoryId"] = new SelectList(_category.AllCategories(), "CategoryId", "CategoryName", product.Category);
+            return View(edit);
+        }
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CategoryId"] = new SelectList(_category.AllCategories(), "CategoryId", "CategoryId", product.CategoryId);
-        //    return View(product);
+        // POST: Products/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Guid id, EditProductVM product)
+        {
 
-        //}
+            if (ModelState.IsValid)
+            {
+
+                Product prod = new Product
+                {
+                    Name = product.ProductName,
+                    InStock = product.InStock,
+                    LongDescription = product.Description,
+                    Price = product.Price,
+
+
+                };
+
+
+                if (product.Photo != null)
+                {
+                    if (product.ExistingImage != null)
+                    {
+                        string filep = Path.Combine(_environment.WebRootPath, "images/", product.ExistingImage);
+                        System.IO.File.Delete(filep);
+                    }
+                    prod.ImageUrl = FileCheck(product);
+                }
+                else
+                {
+                    prod.ImageUrl = product.ExistingImage;
+                }
+
+                prod.CategoryId = product.CategoryId;
+                prod.Category = product.Category;
+
+                _product.UpDate(prod);
+
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CategoryId"] = new SelectList(_category.AllCategories(), "CategoryId", "CategoryId", product.CategoryId);
+            return View(product);
+
+        }
 
         //GET: Products/Delete/5
-        //public IActionResult Delete(Guid id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public IActionResult Delete(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var product = _product.GetById(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var product = _product.GetById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(product);
-        //}
+            return View(product);
+        }
 
-        //// POST: Products/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult DeleteConfirmed(Guid id)
-        //{
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(Guid id)
+        {
 
-        //    _product.Delete(id);
+            _product.Delete(id);
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return RedirectToAction(nameof(Index));
+        }
 
 
         private string FileCheck(AddProductVM p)

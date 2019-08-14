@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Buyit.DAL.Migrations
 {
-    public partial class Much : Migration
+    public partial class Sometask : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -205,7 +205,7 @@ namespace Buyit.DAL.Migrations
                     LongDescription = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: false),
-                    IsPrefferedDrink = table.Column<bool>(nullable: false),
+                    IsPreffered = table.Column<bool>(nullable: false),
                     InStock = table.Column<int>(nullable: false),
                     CategoryId = table.Column<Guid>(nullable: false)
                 },

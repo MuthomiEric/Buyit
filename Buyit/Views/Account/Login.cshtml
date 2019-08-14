@@ -3,26 +3,29 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Login</h2>
-<form asp-action="Login" asp-controller="Account" method="post" class="center-form">
 
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Username" class="control-label"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
+<div class="centerform login-reg">
+    <p>Login</p>
+    <form asp-action="Login" asp-controller="Account" method="post" class="center-form">
 
-    <div class="form-check form-group">
-        <input asp-for="Rememberme" class="form-check-input">
-        <label asp-for="Rememberme" class="form-check-label"></label>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Login" class="btn btn-default input-fill" />
-    </div>
-</form>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Username" class="control-label"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-check form-group">
+            <input asp-for="Rememberme" class="form-check-input">
+            <label asp-for="Rememberme" class="form-check-label"></label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-default input-fill" />
+        </div>
+    </form>
+</div>
